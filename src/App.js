@@ -38,8 +38,14 @@ class App extends Component {
     const UserProfileComponent = () => (
         <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince}/>);
    const LogInComponent = () => (<LogIn user={this.state.currentUser} LogIn={this.LogIn} {...this.props}/>);
-   const DebitComponent = () => (<LogIn user={this.state.currentUser} LogIn={this.LogIn} {...this.props}/>);
-   const CreditComponent = () => (<LogIn user={this.state.currentUser} LogIn={this.LogIn} {...this.props}/>);
+   const DebitComponent = () => (
+    <Debit addDebit={this.updateDebit} debitData={this.state.debit}
+    balance={this.state.accountBalance}/>
+);
+   const CreditComponent = () => (
+    <Credit addCredit={this.updateCredit} creditData={this.state.credit}
+    balance={this.state.accountBalance}/>
+);
 
 
     return (
