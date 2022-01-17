@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Credit from './components/Credit';
+import Debit from './components/Debit';
+import axios from 'axios';
 import Home from './components/Home';
 import UserProfile from './components/UserProfile';
 import LogIn from './components/Login';
-import Credit from './components/Credit';
-import Debit from './components/Debit';
 
 
 
@@ -14,23 +15,103 @@ class App extends Component {
     super();
 
     this.state = {
-      accountBalance: 14568.27,
+      accountBalance: 1000000,
       debit: [],
       credit: [],
       currentUser: {
         userName: 'Marco_k',
-        memberSince: '05/22/98',
+        memberSince: '05/20/04',
       }
     };
   }
 
 
+  componentDidMount = () => {
 
-  LogIn = (Info) => {
-    const newUser = {...this.state.currentUser}
-    newUser.userName = Info.userName
-    this.setState({currentUser: newUser})
-  }
+    axios.get()
+        .then(response => {
+            const debit = response.data;
+
+            const debitAmount = debit.map(debitData => debit.amount);
+
+            let totalDebit = 0;
+
+            for(let i = 0; i < debitAmount.length; i++)
+                totalDebit += debitAmount[i];
+
+            this.setState({
+                debit: debit,
+                accountBalance: this.state.accountBalance - totalDebit
+            });
+        })
+        .catch(err => console.log(err));
+
+    axios.get()
+        .then(response => {
+            const credit = response.data;
+
+            const creditAmount = credit.map(creditData => credit.amount);
+
+            let totalCredit = 0;
+
+            for(let i = 0; i < credit.length; i++)
+                totalCredit += credit[i]
+
+            this.setState({
+                credit: credit,
+                accountBalance: this.state.accountBalance + totalCredit
+            });
+        })
+        .catch(err => console.log(err));
+}
+
+todayDate = () => {
+
+    let todayDate = new Date();
+    let dd = String(todayDate.getDate()).padStart(2, '0');
+    let mm = String(todayDate.getMonth() + 1).padStart(2, '0'); 
+    let yyyy = todayDate.getFullYear();
+
+    todayDate = mm + '/' + dd + '/' + yyyy;
+
+    return todayDate;
+}
+
+updateDebit = (amnt, desc) => {
+
+    let todayDate = this.todayDate();
+
+    const newDebit = {
+        amount: amnt,
+        description: desc,
+        id: this.state.debit.length,
+        date: todayDate
+    };
+
+    this.setState({
+        accountBalance: this.state.accountBalance - amnt,
+        debit: [newDebit].concat(this.state.debit)
+    });
+}
+
+updateCredit = (amnt, desc) => {
+
+    let todayDate = this.todayDate();
+
+    const newCredit = {
+        amount: amnt,
+        description: desc,
+        id: this.state.credit.length,
+        date: todayDate
+    };
+
+    this.setState({
+
+        credit: [newCredit].concat(this.state.credit),
+        accountBalance: Number(this.state.accountBalance) + Number(amnt)
+    });
+}
+  
 
   render() {
 

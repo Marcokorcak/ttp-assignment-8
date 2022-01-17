@@ -14,6 +14,12 @@ class LogIn extends Component {
     }
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.LogIn(this.state.user)
+    this.setState({redirect: true})
+  }
+  
   handleChange = (e) => {
     const updatedUser = {...this.state.user}
     const inputField = e.target.name
@@ -23,11 +29,6 @@ class LogIn extends Component {
     this.setState({user: updatedUser})
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.props.LogIn(this.state.user)
-    this.setState({redirect: true})
-  }
 
   render () {
     if (this.state.redirect) {

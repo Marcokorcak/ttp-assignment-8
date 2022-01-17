@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import AccountBalance from './AccountBalance';
+import {Link} from 'react-router-dom';
 
 class Credit extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            amount: 0.0,
+            amount: 0.00,
             description: '',
         };
     }

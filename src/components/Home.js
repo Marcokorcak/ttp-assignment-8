@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import AccountBalance from './AccountBalance';
 import {Link} from 'react-router-dom';
 import './Home.css';
+import AccountBalance from './AccountBalance';
 
 
 class Home extends Component {
