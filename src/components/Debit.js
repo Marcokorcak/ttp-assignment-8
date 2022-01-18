@@ -12,13 +12,7 @@ class Debit extends Component {
         };
     }
 
-    onChange = (event) => {
 
-        this.setState({
-
-            [event.target.name]: event.target.value
-        });
-    }
 
     render() {
         return (
@@ -41,10 +35,10 @@ class Debit extends Component {
                     Add
                  </button>
 
-                {this.props.debitData.map(debitData =>
-                    <div key={debitData.id}>
-                        <DebitView description={debitData.description} amount={debitData.amount}
-                        date={debitData.date} />
+                {this.props.dataDebit.map(dataDebit =>
+                    <div key={dataDebit.id}>
+                        <DebitView description={dataDebit.description} amount={dataDebit.amount}
+                        date={dataDebit.date} />
                     </div>
                 )}
             </div>
@@ -52,6 +46,14 @@ class Debit extends Component {
     }
 
 };
+
+onChange = (event) => {
+
+    this.setState({
+
+        [event.target.name]: event.target.value
+    });
+}
 
 class DebitView extends Component {
 

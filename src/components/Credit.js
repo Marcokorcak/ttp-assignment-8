@@ -12,13 +12,7 @@ class Credit extends Component {
         };
     }
 
-    onChange = (event) => {
-
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
+ 
     render() {
         return (
             <div className="credits">
@@ -31,20 +25,18 @@ class Credit extends Component {
                 <h1> Credits </h1>
 
                 <form>
-                    Amount:
-                    <input type="number" name="amount" onChange={this.onChange}/> <br/>
-                    Description:
-                    <input type="text" name="description" onChange={this.onChange}/> <br/>
+                    Amount: <input type="number" name="amount" onChange={this.onChange}/> <br/>
+                    Description: <input type="text" name="description" onChange={this.onChange}/> <br/>
                 </form>
 
                 <button onClick={() => this.props.addCredit(this.state.amount, this.state.description)}>
                     Add
                 </button>
 
-                {this.props.creditData.map(creditData =>
-                    <div key={creditData.id}>
-                        <CreditView description={creditData.description}
-                        amount={creditData.amount} date={creditData.date} />
+                {this.props.dataCredit.map(dataCredit =>
+                    <div key={dataCredit.id}>
+                        <CreditView description={dataCredit.description}
+                        amount={dataCredit.amount} date={dataCredit.date} />
                     </div>
                 )}
             </div>
@@ -52,6 +44,14 @@ class Credit extends Component {
     }
 
 };
+
+onChange = (event) => {
+
+    this.setState({
+        [event.target.name]: event.target.value
+    });
+}
+
 
 class CreditView extends Component {
 
