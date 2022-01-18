@@ -12,7 +12,14 @@ class Credit extends Component {
         };
     }
 
- 
+    onChange = (event) => {
+
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
+    
+    
     render() {
         return (
             <div className="credits">
@@ -44,13 +51,6 @@ class Credit extends Component {
     }
 
 };
-
-onChange = (event) => {
-
-    this.setState({
-        [event.target.name]: event.target.value
-    });
-}
 
 
 class CreditView extends Component {
