@@ -32,7 +32,7 @@ class Credit extends Component {
                 <h1> Credits </h1>
 
                 <form>
-                    Amount: <input type="number" name="amount" onChange={this.onChange}/> <br/>
+                    Amount: <input type="number(test) " name="amount" onChange={this.onChange}/> <br/>
                     Description: <input type="text" name="description" onChange={this.onChange}/> <br/>
                 </form>
 
